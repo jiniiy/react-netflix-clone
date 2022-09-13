@@ -1,35 +1,34 @@
-import requests from "./api/requests";
+import { Outlet, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Banner from "./components/Banner";
-import Nav from "./components/Nav";
-import Row from "./components/Row";
 import Footer from "./components/Footer";
+import Nav from "./components/Nav";
+import MainPage from "./pages/MainPage";
+import DetailPage from "./pages/DetailPage";
+import SearchPage from "./pages/SearchPage";
 
-function App() {
+const  Layout = () => {
+  return(
+    <div>
+      <Nav />
+
+      <Outlet />
+
+      <Footer />
+    </div>
+  )
+}
+
+function App() { //여러 컴포넌트 생성 및 라우트 정의하기!
   return (
     <div className='app'>
-      <Nav />
-      <Banner />
+      <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<MainPage />} />
+            <Route path=":movieId" element={<DetailPage />} />
+            <Route path="search" element={<SearchPage />} />
 
-      <Row //아래는 Row의 Props를 내려준것!!
-        title='NETFLIX ORIGINALS'
-        id='NO'
-        fetchUrl={requests.fetchNetflixOriginals}
-        isLargeRow
-      />
-      <Row title='Trending Now' id='TN' fetchUrl={requests.fetchTrending} />
-      <Row title='Top Rated' id='TR' fetchUrl={requests.fetchTopRated} />
-      <Row
-        title='Action Movies'
-        id='AM'
-        fetchUrl={requests.fetchActionMovies}
-      />
-      <Row
-        title='Comedy Movies'
-        id='CM'
-        fetchUrl={requests.fetchComedyMovies}
-      />
-      <Footer />
+          </Route>
+      </Routes>
     </div>
   );
 }
