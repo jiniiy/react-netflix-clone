@@ -26,7 +26,6 @@ function App() { //여러 컴포넌트 생성 및 라우트 정의하기!
             <Route index element={<MainPage />} />
             <Route path=":movieId" element={<DetailPage />} />
             <Route path="search" element={<SearchPage />} />
-
           </Route>
       </Routes>
     </div>

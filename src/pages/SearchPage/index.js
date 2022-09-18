@@ -1,11 +1,13 @@
 import axios from '../../api/axios';
 import "./SearchPage.css"
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";  
+import { useLocation, useNavigate } from "react-router-dom";  
 import { useDebounce } from '../../hooks/useDebounce';
 
 export default function SearchPage(){ //useLocation을 아용한 검색 페이지 구현하기
     
+    const navigate = useNavigate(); // DetailPage로 Router를 이용해서 페이지이동하기위함.
+
     const [searchResults, setSearchResults] = useState([]);
     const useQuery =() => {
         return new URLSearchParams(useLocation().search);
@@ -48,6 +50,7 @@ export default function SearchPage(){ //useLocation을 아용한 검색 페이�
                             return(
                                 <div className="movie" key={movie.id}>
                                     <div
+                                    onClick={() => navigate(`/${movie.id}`)} //image눌렀을때, DetailPage로 이동 byUsing_movie.id(key값)
                                     className="movie_column-poster"
                                     >
                                         <img
