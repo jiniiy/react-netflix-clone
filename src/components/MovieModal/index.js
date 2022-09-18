@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./MovieModal.css";
+import useOnClickOutside from "../../hooks/useOnClickOutside";
 
 function MovieModal({ //MovieModal 컴포넌트의 props정의해주기(내려주기)
     backdrop_path,
@@ -11,9 +12,12 @@ function MovieModal({ //MovieModal 컴포넌트의 props정의해주기(내려�
     vote_average,
     setModalOpen
 })  {
+    const ref = useRef(); //modal 창 외부영역 클릭시, 모달 닫게 만드는 useRef()와 Hooks함수_useOnClickOutside를 사용해서 구현하기!
+    useOnClickOutside(ref,() => {setModalOpen(false)})
+
     return <div className="presentation">
         <div className="wrapper-modal">
-            <div className="modal">
+            <div className="modal" ref={ref}>  
                 <span onClick={() => setModalOpen(false)} className="modal-close">
                     X
                 </span>
