@@ -71,7 +71,7 @@ export default function Row({ isLargeRow, title, id, fetchUrl }) {
           pagination={{ clickable: true }}
         >
           <div id={id} className='row__posters'>
-            {movies.map((movie) => (
+            {movies?.map((movie) => ( // useEffect(() => {fetchMovieData(); 렌더링실시 할때, 방어코드 UseEffect내 스테이트값이 없을때, 에러나지않게 movies?.map()
               <SwiperSlide>
                 <img
                 key={movie.id}
